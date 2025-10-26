@@ -3,7 +3,7 @@ package br.com.alura.AluraFake.task;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "option")
+@Table(name = "task_option")
 public class Option {
 
     public Option() {
@@ -27,6 +27,7 @@ public class Option {
     private boolean isCorrect;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "task_id")
     private Task task;
 
     public Long getId() {

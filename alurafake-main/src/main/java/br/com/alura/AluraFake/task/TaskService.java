@@ -1,5 +1,8 @@
 package br.com.alura.AluraFake.task;
 
+import br.com.alura.AluraFake.course.Course;
+import br.com.alura.AluraFake.course.CourseRepository;
+import br.com.alura.AluraFake.course.Status;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,10 +13,12 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
     private final OptionRepository optionRepository;
+    private final CourseRepository courseRepository;
 
-    public TaskService(TaskRepository taskRepository, OptionRepository optionRepository) {
+    public TaskService(TaskRepository taskRepository, OptionRepository optionRepository, CourseRepository courseRepository) {
         this.taskRepository = taskRepository;
         this.optionRepository = optionRepository;
+        this.courseRepository = courseRepository;
     }
 
     public MultipleChoiceTask saveMultipleChoiceTask(MultipleChoiceTask task) {
@@ -23,8 +28,7 @@ public class TaskService {
             throw new IllegalArgumentException("A multiple choice question must have between 3 and 5 options.");
         }
 
-        String statement = task.getStatement();
-        if (statement == null || statement.length() < 4 || statement.length() > 255) {
+        if (task.getStatement() == null || task.getStatement().length() < 4 || task.getStatement().length() > 255) {
             throw new IllegalArgumentException("Statement must have between 4 and 255 characters.");
         }
 
@@ -45,7 +49,7 @@ public class TaskService {
             if (text.length() < 4 || text.length() > 80) {
                 throw new IllegalArgumentException("Each option must have between 4 and 80 characters.");
             }
-            if (text.equalsIgnoreCase(statement)) {
+            if (text.equalsIgnoreCase(task.getStatement())) {
                 throw new IllegalArgumentException("Option text cannot be the same as the statement.");
             }
 
@@ -63,8 +67,31 @@ public class TaskService {
             texts.add(text);
         }
 
-        // TODO: validate course status == BUILDING
-        // TODO: handle task order reordering
+        Course course = courseRepository.findById(task.getCourse().getId())
+                .orElseThrow(() -> new IllegalArgumentException("Course not found."));
+
+        if (!course.getStatus().equals(Status.BUILDING)) {
+            throw new IllegalArgumentException("Only courses with status BUILDING can receive tasks.");
+        }
+
+        List<Task> existingTasks = taskRepository.findByCourseOrderByOrderAsc(course);
+        int requestedOrder = task.getPosition();
+
+        if (existingTasks.size() + 1 < requestedOrder) {
+            throw new IllegalArgumentException("Invalid order sequence. There are missing previous orders.");
+        }
+
+        for (Task existing : existingTasks) {
+            if (existing.getPosition() >= requestedOrder) {
+                existing.setPosition(existing.getPosition() + 1);
+                taskRepository.save(existing);
+            }
+        }
+
+        boolean exists = taskRepository.existsByCourseAndStatement(course, task.getStatement());
+        if (exists) {
+            throw new IllegalArgumentException("A task with this statement already exists in the course.");
+        }
 
         MultipleChoiceTask savedTask = taskRepository.save(task);
         for (Option option : options) {

@@ -11,10 +11,10 @@ public abstract class Task {
     public Task() {
     }
 
-    public Task(Long id, String statement, int order, Type type, Course course) {
+    public Task(Long id, String statement, int position, Type type, Course course) {
         this.id = id;
         this.statement = statement;
-        this.order = order;
+        this.position = position;
         this.type = type;
         this.course = course;
     }
@@ -23,17 +23,18 @@ public abstract class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 255)
+    @Column(name = "statement", nullable = false, length = 255)
     private String statement;
 
-    @Column(nullable = false)
-    private int order;
+    @Column(name = "position", nullable = false)
+    private int position;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Type type;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "course_id")
     private Course course;
 
     public Long getId() {
@@ -52,12 +53,12 @@ public abstract class Task {
         this.statement = statement;
     }
 
-    public int getOrder() {
-        return order;
+    public int getPosition() {
+        return position;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     public Type getType() {

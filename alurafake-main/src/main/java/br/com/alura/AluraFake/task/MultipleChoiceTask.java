@@ -6,18 +6,20 @@ import jakarta.persistence.OneToMany;
 
 import java.util.List;
 
-public class MultipleChoiceTask extends Task{
+public class MultipleChoiceTask extends Task {
+
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Option> options;
 
     public MultipleChoiceTask() {
+        super(id, title, description);
+        setType(Type.MULTIPLE_CHOICE);
     }
 
-    public MultipleChoiceTask(Long id, String statement, int order, Type type, Course course, List<Option> options) {
-        super(id, statement, order, type, course);
+    public MultipleChoiceTask(String statement, int position, Course course, List<Option> options) {
+        super(null, statement, position, Type.MULTIPLE_CHOICE, course);
         this.options = options;
     }
-
-    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
-    private List<Option> options;
 
     public List<Option> getOptions() {
         return options;

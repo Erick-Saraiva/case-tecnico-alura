@@ -1,23 +1,27 @@
 package br.com.alura.AluraFake.task;
 
+import br.com.alura.AluraFake.course.Course;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 
-public class SingleChoiceTask extends Task{
+@Entity
+@DiscriminatorValue("SINGLE")
+public class SingleChoiceTask extends Task {
+
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Option> options;
 
     public SingleChoiceTask() {
     }
 
-    public SingleChoiceTask(Long id, String statement, int order, Type type, Course course, List<Option> options) {
-        super(id, statement, order, type, course);
+    public SingleChoiceTask(Long id, String statement, int position, Type type, Course course, List<Option> options) {
+        super(id, statement, position, type, course);
         this.options = options;
     }
-
-    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
-    private List<Option> options;
 
     public List<Option> getOptions() {
         return options;
@@ -25,5 +29,9 @@ public class SingleChoiceTask extends Task{
 
     public void setOptions(List<Option> options) {
         this.options = options;
+    }
+
+    public boolean hasExactlyOneCorrectOption() {
+        return options != null && options.stream().filter(Option::isCorrect).count() == 1;
     }
 }
