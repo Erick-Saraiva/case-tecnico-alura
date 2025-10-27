@@ -1,10 +1,16 @@
-package br.com.alura.AluraFake.course;
+package br.com.alura.AluraFake.controller;
 
-import br.com.alura.AluraFake.task.Task;
-import br.com.alura.AluraFake.task.TaskRepository;
-import br.com.alura.AluraFake.task.Type;
-import br.com.alura.AluraFake.user.*;
-import br.com.alura.AluraFake.util.ErrorItemDTO;
+import br.com.alura.AluraFake.domain.Course;
+import br.com.alura.AluraFake.domain.User;
+import br.com.alura.AluraFake.dto.CourseListItemDTO;
+import br.com.alura.AluraFake.dto.NewCourseDTO;
+import br.com.alura.AluraFake.repository.CourseRepository;
+import br.com.alura.AluraFake.repository.UserRepository;
+import br.com.alura.AluraFake.domain.Task;
+import br.com.alura.AluraFake.repository.TaskRepository;
+import br.com.alura.AluraFake.enums.Status;
+import br.com.alura.AluraFake.enums.Type;
+import br.com.alura.AluraFake.dto.ErrorItemDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;

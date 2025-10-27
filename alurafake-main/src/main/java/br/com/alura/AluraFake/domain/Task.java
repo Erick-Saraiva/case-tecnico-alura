@@ -1,6 +1,6 @@
-package br.com.alura.AluraFake.task;
+package br.com.alura.AluraFake.domain;
 
-import br.com.alura.AluraFake.course.Course;
+import br.com.alura.AluraFake.enums.Type;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

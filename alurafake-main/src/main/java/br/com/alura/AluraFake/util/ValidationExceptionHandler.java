@@ -1,5 +1,6 @@
 package br.com.alura.AluraFake.util;
 
+import br.com.alura.AluraFake.dto.ErrorItemDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

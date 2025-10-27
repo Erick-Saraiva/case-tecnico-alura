@@ -1,8 +1,9 @@
-package br.com.alura.AluraFake.task;
+package br.com.alura.AluraFake.service;
 
-import br.com.alura.AluraFake.course.Course;
-import br.com.alura.AluraFake.course.CourseRepository;
-import br.com.alura.AluraFake.course.Status;
+import br.com.alura.AluraFake.domain.*;
+import br.com.alura.AluraFake.repository.CourseRepository;
+import br.com.alura.AluraFake.enums.Status;
+import br.com.alura.AluraFake.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

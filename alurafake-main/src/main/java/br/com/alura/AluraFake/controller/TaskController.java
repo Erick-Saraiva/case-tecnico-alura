@@ -1,7 +1,12 @@
-package br.com.alura.AluraFake.task;
+package br.com.alura.AluraFake.controller;
 
-import br.com.alura.AluraFake.course.Course;
-import br.com.alura.AluraFake.course.CourseRepository;
+import br.com.alura.AluraFake.domain.Course;
+import br.com.alura.AluraFake.domain.MultipleChoiceTask;
+import br.com.alura.AluraFake.domain.OpenTextTask;
+import br.com.alura.AluraFake.domain.SingleChoiceTask;
+import br.com.alura.AluraFake.repository.CourseRepository;
+import br.com.alura.AluraFake.service.TaskService;
+import br.com.alura.AluraFake.enums.Type;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

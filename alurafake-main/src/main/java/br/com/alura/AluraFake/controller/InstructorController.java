@@ -1,11 +1,12 @@
-package br.com.alura.AluraFake.task;
+package br.com.alura.AluraFake.controller;
 
-import br.com.alura.AluraFake.course.Course;
-import br.com.alura.AluraFake.course.CourseRepository;
-import br.com.alura.AluraFake.course.Status;
-import br.com.alura.AluraFake.user.Role;
-import br.com.alura.AluraFake.user.User;
-import br.com.alura.AluraFake.user.UserRepository;
+import br.com.alura.AluraFake.domain.Course;
+import br.com.alura.AluraFake.repository.CourseRepository;
+import br.com.alura.AluraFake.enums.Status;
+import br.com.alura.AluraFake.repository.TaskRepository;
+import br.com.alura.AluraFake.enums.Role;
+import br.com.alura.AluraFake.domain.User;
+import br.com.alura.AluraFake.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

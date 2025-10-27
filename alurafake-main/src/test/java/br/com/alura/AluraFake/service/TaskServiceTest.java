@@ -1,9 +1,12 @@
-package br.com.alura.AluraFake.user;
+package br.com.alura.AluraFake.service;
 
-import br.com.alura.AluraFake.task.*;
-import br.com.alura.AluraFake.course.Course;
-import br.com.alura.AluraFake.course.CourseRepository;
-import br.com.alura.AluraFake.course.Status;
+import br.com.alura.AluraFake.domain.MultipleChoiceTask;
+import br.com.alura.AluraFake.domain.Option;
+import br.com.alura.AluraFake.enums.Status;
+import br.com.alura.AluraFake.repository.OptionRepository;
+import br.com.alura.AluraFake.repository.TaskRepository;
+import br.com.alura.AluraFake.domain.Course;
+import br.com.alura.AluraFake.repository.CourseRepository;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

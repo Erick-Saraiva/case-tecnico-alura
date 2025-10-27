@@ -1,6 +1,12 @@
 package br.com.alura.AluraFake.course;
 
-import br.com.alura.AluraFake.user.*;
+import br.com.alura.AluraFake.controller.CourseController;
+import br.com.alura.AluraFake.domain.Course;
+import br.com.alura.AluraFake.domain.User;
+import br.com.alura.AluraFake.dto.NewCourseDTO;
+import br.com.alura.AluraFake.enums.Role;
+import br.com.alura.AluraFake.repository.CourseRepository;
+import br.com.alura.AluraFake.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
