@@ -74,7 +74,7 @@ public class TaskService {
             throw new IllegalArgumentException("Only courses with status BUILDING can receive tasks.");
         }
 
-        List<Task> existingTasks = taskRepository.findByCourseOrderByOrderAsc(course);
+        List<Task> existingTasks = taskRepository.findByCourseOrderByPositionAsc(course);
         int requestedOrder = task.getPosition();
 
         if (existingTasks.size() + 1 < requestedOrder) {

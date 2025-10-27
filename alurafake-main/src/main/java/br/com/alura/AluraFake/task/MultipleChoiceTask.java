@@ -12,7 +12,6 @@ public class MultipleChoiceTask extends Task {
     private List<Option> options;
 
     public MultipleChoiceTask() {
-        super(id, title, description);
         setType(Type.MULTIPLE_CHOICE);
     }
 

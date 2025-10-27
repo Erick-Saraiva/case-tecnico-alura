@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-    List<Task> findByCourseOrderByOrderAsc(Course course);
+    List<Task> findByCourseOrderByPositionAsc(Course course);
 
     boolean existsByCourseAndStatement(Course course, String statement);
 }
