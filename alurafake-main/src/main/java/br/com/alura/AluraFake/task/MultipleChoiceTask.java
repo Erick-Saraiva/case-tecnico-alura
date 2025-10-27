@@ -2,10 +2,14 @@ package br.com.alura.AluraFake.task;
 
 import br.com.alura.AluraFake.course.Course;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 import java.util.List;
 
+@Entity
+@Table(name = "multiplechoicetask")
 public class MultipleChoiceTask extends Task {
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -15,8 +19,8 @@ public class MultipleChoiceTask extends Task {
         setType(Type.MULTIPLE_CHOICE);
     }
 
-    public MultipleChoiceTask(String statement, int position, Course course, List<Option> options) {
-        super(null, statement, position, Type.MULTIPLE_CHOICE, course);
+    public MultipleChoiceTask(Long id, String statement, int position, Course course, List<Option> options) {
+        super(id, statement, position, options, Type.MULTIPLE_CHOICE, course);
         this.options = options;
     }
 

@@ -1,14 +1,12 @@
 package br.com.alura.AluraFake.task;
 
 import br.com.alura.AluraFake.course.Course;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
+@Table(name = "singlechoicetask")
 @DiscriminatorValue("SINGLE")
 public class SingleChoiceTask extends Task {
 
@@ -18,8 +16,8 @@ public class SingleChoiceTask extends Task {
     public SingleChoiceTask() {
     }
 
-    public SingleChoiceTask(Long id, String statement, int position, Type type, Course course, List<Option> options) {
-        super(id, statement, position, type, course);
+    public SingleChoiceTask(Long id, String statement, int position, List<Option> options, Type type, Course course) {
+        super(id, statement, position, options, type, course);
         this.options = options;
     }
 

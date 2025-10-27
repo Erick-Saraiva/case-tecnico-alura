@@ -20,10 +20,10 @@ public class Option {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 80)
+    @Column(name = "option_text", nullable = false, length = 80)
     private String option;
 
-    @Column(nullable = false)
+    @Column(name = "is_correct", nullable = false)
     private boolean isCorrect;
 
     @ManyToOne(optional = false)

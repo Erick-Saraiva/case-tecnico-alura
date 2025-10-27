@@ -3,6 +3,9 @@ package br.com.alura.AluraFake.task;
 import br.com.alura.AluraFake.course.Course;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "task")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -11,10 +14,11 @@ public abstract class Task {
     public Task() {
     }
 
-    public Task(Long id, String statement, int position, Type type, Course course) {
+    public Task(Long id, String statement, int position, List<Option> options, Type type, Course course) {
         this.id = id;
         this.statement = statement;
         this.position = position;
+        this.options = options;
         this.type = type;
         this.course = course;
     }
@@ -28,6 +32,9 @@ public abstract class Task {
 
     @Column(name = "position", nullable = false)
     private int position;
+
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Option> options = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -75,5 +82,13 @@ public abstract class Task {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public List<Option> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<Option> options) {
+        this.options = options;
     }
 }
